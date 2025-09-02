@@ -1,0 +1,42 @@
+import string
+
+def analyze_sentence(sentence):
+    # Initialize counters
+    char_count = 0
+    word_count = 0
+    vowel_count = 0
+    vowel_details = {'a': 0, 'e': 0, 'i': 0, 'o': 0, 'u': 0}  # Track individual vowels
+
+    # Define vowels for checking
+    vowels = "aeiouAEIOU"
+    
+    # Remove leading/trailing whitespace and treat multiple spaces as one
+    sentence = sentence.strip()
+    
+    # Iterate through each character in the sentence
+    for char in sentence:
+        # Increment character count for each character, including spaces and punctuation
+        char_count += 1
+        
+        # Check if the character is a vowel (case-insensitive)
+        if char.lower() in vowels:
+            vowel_count += 1
+            vowel_details[char.lower()] += 1
+    
+    # Count words by splitting the sentence by spaces (treating multiple spaces as one)
+    word_count = len([word for word in sentence.split() if word != ''])
+    
+    # Return the results along with individual vowel occurrences
+    return char_count, word_count, vowel_count, vowel_details
+
+# Example sentence
+sentence = "Hello, world! This is   an example  sentence, with punctuation."
+
+# Analyze the sentence
+char_count, word_count, vowel_count, vowel_details = analyze_sentence(sentence)
+
+# Output the results
+print(f"Character count (including spaces and punctuation): {char_count}")
+print(f"Word count: {word_count}")
+print(f"Vowel count (total occurrences): {vowel_count}")
+print(f"Vowel breakdown: {vowel_details}")
